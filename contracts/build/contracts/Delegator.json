@@ -1,0 +1,707 @@
+{
+  "contractName": "Delegator",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "fallback"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b604051602080610322833981016040528080519060200190919050506100478161004d640100000000026100b4176401000000009004565b50610140565b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508073ffffffffffffffffffffffffffffffffffffffff1660405180807f696e697469616c697a6528290000000000000000000000000000000000000000815250600c01905060405180910390207c010000000000000000000000000000000000000000000000000000000090046040518163ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004016000604051808303818661646e5a03f4925050505050565b6101d38061014f6000396000f300606060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638129fc1c1461009d575b341561004c57600080fd5b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690503660008037600080366000846127105a03f43d806000803e816000811461009857816000f35b816000fd5b34156100a857600080fd5b6100b06100b2565b005b565b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508073ffffffffffffffffffffffffffffffffffffffff1660405180807f696e697469616c697a6528290000000000000000000000000000000000000000815250600c01905060405180910390207c010000000000000000000000000000000000000000000000000000000090046040518163ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004016000604051808303818661646e5a03f49250505050505600a165627a7a72305820cc8f0d01ec9474007f25d987b5f1632abaa63e46fb968baf0105331a723c94b20029",
+  "deployedBytecode": "0x606060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638129fc1c1461009d575b341561004c57600080fd5b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690503660008037600080366000846127105a03f43d806000803e816000811461009857816000f35b816000fd5b34156100a857600080fd5b6100b06100b2565b005b565b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508073ffffffffffffffffffffffffffffffffffffffff1660405180807f696e697469616c697a6528290000000000000000000000000000000000000000815250600c01905060405180910390207c010000000000000000000000000000000000000000000000000000000090046040518163ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004016000604051808303818661646e5a03f49250505050505600a165627a7a72305820cc8f0d01ec9474007f25d987b5f1632abaa63e46fb968baf0105331a723c94b20029",
+  "sourceMap": "53:544:0:-;;;89:59;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;128:15;136:6;128:7;;;;;:15;;;:::i;:::-;89:59;53:544;;205:124:4;263:7;251:11;;:19;;;;;;;;;;;;;;;;;;274:7;:20;;302;;;;;;;;;;;;;;;;;;;274:50;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;205:124;:::o;53:544:0:-;;;;;;;",
+  "deployedSourceMap": "53:544:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;207:10;220:11;;;;;;;;;;;207:24;;276:12;271:3;266;253:12;373:1;370;356:12;351:3;343:6;335:5;330:3;326;313:12;397:14;440:5;437:1;434;419:14;460:7;483:1;478:44;;;;564:5;561:1;554:6;478:44;506:5;503:1;496:6;151:37;;;;;;;;;;;;;;;:::o;205:124:4:-;263:7;251:11;;:19;;;;;;;;;;;;;;;;;;274:7;:20;;302;;;;;;;;;;;;;;;;;;;274:50;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;205:124;:::o",
+  "source": "pragma solidity^0.4.19;\r\nimport \"./Upgradable.sol\";\r\ncontract Delegator is Upgradable{\r\n\tfunction Delegator(address target){\r\n\t\treplace(target);\r\n\t}\r\n\tfunction initialize(){\r\n\t\trevert;\r\n\t}\r\n\tfunction(){\r\n\t\t var target = destination;\r\n\t\t assembly { \r\n\t\t\tcalldatacopy(0x0, 0x0, calldatasize)    \r\n\t\t\tlet success := delegatecall(sub(gas, 10000), target, 0x0, calldatasize, 0, 0)    \r\n\t\t\tlet retSz := returndatasize   \r\n\t\t\treturndatacopy(0, 0, retSz)  \r\n\t\t\tswitch success      \r\n\t\t\tcase 0 {    \r\n\t\t\t\trevert(0, retSz)    \r\n\t\t\t}            \r\n\t\t\tdefault {\r\n\t\t\t\treturn(0, retSz)\r\n\t\t\t}  \r\n\t\t} \r\n\t\t\r\n\t}\r\n\r\n}\r\n",
+  "sourcePath": "E:\\Blockchain\\Major Project\\contracts\\contracts\\Delegator.sol",
+  "ast": {
+    "absolutePath": "/E/Blockchain/Major Project/contracts/contracts/Delegator.sol",
+    "exportedSymbols": {
+      "Delegator": [
+        29
+      ]
+    },
+    "id": 30,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".19"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "absolutePath": "/E/Blockchain/Major Project/contracts/contracts/Upgradable.sol",
+        "file": "./Upgradable.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 30,
+        "sourceUnit": 270,
+        "src": "25:26:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": [],
+            "baseName": {
+              "contractScope": null,
+              "id": 3,
+              "name": "Upgradable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 269,
+              "src": "75:10:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Upgradable_$269",
+                "typeString": "contract Upgradable"
+              }
+            },
+            "id": 4,
+            "nodeType": "InheritanceSpecifier",
+            "src": "75:10:0"
+          }
+        ],
+        "contractDependencies": [
+          269
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 29,
+        "linearizedBaseContracts": [
+          29,
+          269
+        ],
+        "name": "Delegator",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 13,
+              "nodeType": "Block",
+              "src": "123:25:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10,
+                        "name": "target",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6,
+                        "src": "136:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 9,
+                      "name": "replace",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 268,
+                      "src": "128:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 11,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "128:15:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 12,
+                  "nodeType": "ExpressionStatement",
+                  "src": "128:15:0"
+                }
+              ]
+            },
+            "id": 14,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "Delegator",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6,
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14,
+                  "src": "108:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "108:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "107:16:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 8,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "123:0:0"
+            },
+            "scope": 29,
+            "src": "89:59:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 19,
+              "nodeType": "Block",
+              "src": "172:16:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 17,
+                    "name": "revert",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 394,
+                    "src": "177:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_revert_pure$__$returns$__$",
+                      "typeString": "function () pure"
+                    }
+                  },
+                  "id": 18,
+                  "nodeType": "ExpressionStatement",
+                  "src": "177:6:0"
+                }
+              ]
+            },
+            "id": 20,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "initialize",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 15,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "170:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 16,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "172:0:0"
+            },
+            "scope": 29,
+            "src": "151:37:0",
+            "stateMutability": "nonpayable",
+            "superFunction": 238,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 27,
+              "nodeType": "Block",
+              "src": "201:391:0",
+              "statements": [
+                {
+                  "assignments": [
+                    23
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 23,
+                      "name": "target",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 28,
+                      "src": "207:10:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": null,
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 25,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "id": 24,
+                    "name": "destination",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 233,
+                    "src": "220:11:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "207:24:0"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "target": {
+                        "declaration": 23,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "343:6:0",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 26,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    calldatacopy(0x0, 0x0, calldatasize)\n    let success := delegatecall(sub(gas, 10000), target, 0x0, calldatasize, 0, 0)\n    let retSz := returndatasize\n    returndatacopy(0, 0, retSz)\n    switch success\n    case 0 {\n        revert(0, retSz)\n    }\n    default {\n        return(0, retSz)\n    }\n}",
+                  "src": "237:355:0"
+                }
+              ]
+            },
+            "id": 28,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "199:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 22,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:0:0"
+            },
+            "scope": 29,
+            "src": "191:401:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 30,
+        "src": "53:544:0"
+      }
+    ],
+    "src": "0:599:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/E/Blockchain/Major Project/contracts/contracts/Delegator.sol",
+    "exportedSymbols": {
+      "Delegator": [
+        29
+      ]
+    },
+    "id": 30,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".19"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "absolutePath": "/E/Blockchain/Major Project/contracts/contracts/Upgradable.sol",
+        "file": "./Upgradable.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 30,
+        "sourceUnit": 270,
+        "src": "25:26:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": [],
+            "baseName": {
+              "contractScope": null,
+              "id": 3,
+              "name": "Upgradable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 269,
+              "src": "75:10:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Upgradable_$269",
+                "typeString": "contract Upgradable"
+              }
+            },
+            "id": 4,
+            "nodeType": "InheritanceSpecifier",
+            "src": "75:10:0"
+          }
+        ],
+        "contractDependencies": [
+          269
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 29,
+        "linearizedBaseContracts": [
+          29,
+          269
+        ],
+        "name": "Delegator",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 13,
+              "nodeType": "Block",
+              "src": "123:25:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 10,
+                        "name": "target",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6,
+                        "src": "136:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 9,
+                      "name": "replace",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 268,
+                      "src": "128:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 11,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "128:15:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 12,
+                  "nodeType": "ExpressionStatement",
+                  "src": "128:15:0"
+                }
+              ]
+            },
+            "id": 14,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "Delegator",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6,
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14,
+                  "src": "108:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "108:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "107:16:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 8,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "123:0:0"
+            },
+            "scope": 29,
+            "src": "89:59:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 19,
+              "nodeType": "Block",
+              "src": "172:16:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 17,
+                    "name": "revert",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 394,
+                    "src": "177:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_revert_pure$__$returns$__$",
+                      "typeString": "function () pure"
+                    }
+                  },
+                  "id": 18,
+                  "nodeType": "ExpressionStatement",
+                  "src": "177:6:0"
+                }
+              ]
+            },
+            "id": 20,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "initialize",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 15,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "170:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 16,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "172:0:0"
+            },
+            "scope": 29,
+            "src": "151:37:0",
+            "stateMutability": "nonpayable",
+            "superFunction": 238,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 27,
+              "nodeType": "Block",
+              "src": "201:391:0",
+              "statements": [
+                {
+                  "assignments": [
+                    23
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 23,
+                      "name": "target",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 28,
+                      "src": "207:10:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": null,
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 25,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "id": 24,
+                    "name": "destination",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 233,
+                    "src": "220:11:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "207:24:0"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "target": {
+                        "declaration": 23,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "343:6:0",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 26,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    calldatacopy(0x0, 0x0, calldatasize)\n    let success := delegatecall(sub(gas, 10000), target, 0x0, calldatasize, 0, 0)\n    let retSz := returndatasize\n    returndatacopy(0, 0, retSz)\n    switch success\n    case 0 {\n        revert(0, retSz)\n    }\n    default {\n        return(0, retSz)\n    }\n}",
+                  "src": "237:355:0"
+                }
+              ]
+            },
+            "id": 28,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 21,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "199:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 22,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:0:0"
+            },
+            "scope": 29,
+            "src": "191:401:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 30,
+        "src": "53:544:0"
+      }
+    ],
+    "src": "0:599:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-05-07T16:45:33.408Z"
+}
