@@ -9,12 +9,17 @@ contract TestPostMan {
 	function testSubscribingProcess()public{
 		bool expected=true;
 		bool result=_postMan.subscribeClient(this);
-		Assert.equal(result, expected, "subscriber added");
+		Assert.equal(result, expected, "subscriber not added");
 	}
 	function testUnSubscribingProcess()public{
 		bool expected=true;
 		bool result=_postMan.unSubscribeClient(this);
+		Assert.equal(result, expected, "subscriber not deleted");
+	}
+	function testInitiateContractWithClient()public{
+		testSubscribingProcess();
+		bool expected=true;
+		bool result=_postMan.initiateContractWithClient(this,keccak256("i am blockchain developer"),keccak256("blockchain"));
 		Assert.equal(result, expected, "subscriber deleted");
 	}
-	
 }
