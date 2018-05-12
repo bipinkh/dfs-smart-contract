@@ -1,6 +1,6 @@
 pragma solidity^0.4.19;
 import "./Upgradable.sol";
-import "./ExternalStorage.sol";
+import "./EternalStorage.sol";
 import "./DatabaseAccessControl.sol";
 
 contract StoringChunk is DatabaseAccessControl{
@@ -12,12 +12,11 @@ contract StoringChunk is DatabaseAccessControl{
 						onlyPostMan(postManAddress)
 						returns (bool)
 						{
-							ExternalStorage externalStorage=ExternalStorage(storageAddress);
-								if(externalStorage.checkSubscriber(clientAddress)){
+							EternalStorage externalStorage=EternalStorage(storageAddress);
+							
 									externalStorage.setChunkInfo(clientAddress,chunkHash,GMHash);
 									return true;
-								}
-								return false;
+								
 	
 	}
 	function deleteChunk(address storageAddress,
@@ -26,12 +25,11 @@ contract StoringChunk is DatabaseAccessControl{
 						onlyPostMan(postManAddress)
 						returns (bool)
 						{
-							ExternalStorage externalStorage=ExternalStorage(storageAddress);
-								if(externalStorage.checkSubscriber(clientAddress)){
+							EternalStorage externalStorage=EternalStorage(storageAddress);
+								
 									externalStorage.deleteChunkInfo(clientAddress);
 									return true;
-								}
-								return false;
+							
 	}
 	function viewChunk(address storageAddress,
 						address clientAddress,
@@ -39,13 +37,12 @@ contract StoringChunk is DatabaseAccessControl{
 						onlyPostMan(postManAddress)
 						returns (bool)
 						{
-							ExternalStorage externalStorage=ExternalStorage(storageAddress);
-								if(externalStorage.checkSubscriber(clientAddress)){
+							EternalStorage externalStorage=EternalStorage(storageAddress);
+							
 									bytes32 chunkHash;
 									bytes32 GMHash;
 									(chunkHash,GMHash)=externalStorage.getChunkInfo(clientAddress);
 									return true;
-								}
-								return false;
+								
 	}
 }

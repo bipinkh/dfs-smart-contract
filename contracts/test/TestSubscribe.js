@@ -1,5 +1,5 @@
 var Subscribe=artifacts.require("Subscribe");
-var Database=artifacts.require("ExternalStorage");
+var Database=artifacts.require("EternalStorage");
 var DatabaseAccessControl=artifacts.require("DatabaseAccessControl");
 contract('Subscribe',function(accounts){
 	let subscribe

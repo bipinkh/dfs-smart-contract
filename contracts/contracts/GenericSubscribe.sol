@@ -1,21 +1,22 @@
 pragma solidity^0.4.19;
 import "./Upgradable.sol";
-import "./ExternalStorage.sol";
+import "./EternalStorage.sol";
 import "./DatabaseAccessControl.sol";
 
 contract GenericSubscribe is DatabaseAccessControl{
-	struct clientsInfo{
-	    address clientAddress;
-	}
-	//look specific clients if address is known
-	 mapping  (address=>clientsInfo[])public postManToClientsMap;
+	
 	 
-	function subscribeClient(address postManAddress,address clientAddress)onlyPostMan(postManAddress){
-	    postManToClientsMap[postManAddress].push(clientsInfo(clientAddress));
+	function subscribeClient(address storageAddress,address postManAddress,address clientAddress)onlyPostMan(postManAddress){
+		EternalStorage eternalStorage=EternalStorage(storageAddress);
+		eternalStorage.addPostManToClientMap(postManAddress,clientAddress);
+	    //postManToClientsMap[postManAddress].push(clientsInfo(clientAddress));
 	    
 	}
-	function unSubscribeClient(address postManAddress,address clientAddress)onlyPostMan(postManAddress){
-		clientsInfo[] memory totalClients=postManToClientsMap[postManAddress];
+	function unSubscribeClient(address storageAddress,address postManAddress,address clientAddress)onlyPostMan(postManAddress){
+		EternalStorage eternalStorage=EternalStorage(storageAddress);
+		eternalStorage.deletePostManToClientMap(postManAddress,clientAddress);
+	  
+		/*clientsInfo[] memory totalClients=postManToClientsMap[postManAddress];
 		uint totalClientsLength=totalClients.length;
 		for(uint i=0;i<totalClientsLength;i++){
 			if(totalClients[i].clientAddress==clientAddress){
@@ -23,10 +24,13 @@ contract GenericSubscribe is DatabaseAccessControl{
 				delete postManToClientsMap[postManAddress][i];
 				delete totalClients[i];		
 			}
-		}
+		}*/
 	}
-	function getClientStatus(address postManAddress,address clientAddress)public view returns(bool){
-		clientsInfo[] memory totalClients=postManToClientsMap[postManAddress];
+	function getClientStatus(address storageAddress,address postManAddress,address clientAddress)public view returns(bool){
+		EternalStorage eternalStorage=EternalStorage(storageAddress);
+		return eternalStorage.getClientStatus(postManAddress,clientAddress);
+	  
+		/*clientsInfo[] memory totalClients=postManToClientsMap[postManAddress];
 		uint totalClientsLength=totalClients.length;
 		for(uint i=0;i<totalClientsLength;i++){
 			if(totalClients[i].clientAddress==clientAddress){
@@ -34,10 +38,14 @@ contract GenericSubscribe is DatabaseAccessControl{
 				return true;
 			}
 		}
-		return false;
+		return false;*/
 	}
-    function getClientsList(address postManAddress)public view onlyPostMan(postManAddress)returns (address[]){
-        uint lengthOfSubscriber=postManToClientsMap[postManAddress].length;
+    /*function getClientsList(address storageAddress,address postManAddress)public view onlyPostMan(postManAddress)returns (address[]){
+        EternalStorage eternalStorage=EternalStorage(storageAddress);
+		address[] listOfAdd= eternalStorage.getClientList(postManAddress);
+		return listOfAdd;
+	  
+		/*uint lengthOfSubscriber=postManToClientsMap[postManAddress].length;
         address[]    memory cAddress = new address[](lengthOfSubscriber);
         
         for (uint i = 0; i < lengthOfSubscriber; i++) {
@@ -46,10 +54,10 @@ contract GenericSubscribe is DatabaseAccessControl{
         }
         
         return (cAddress);
-    }
-	function getTotalClientsPerPostMan(address postManAddress)public view onlyPostMan(postManAddress)returns(uint){
-		uint totalClients=postManToClientsMap[postManAddress].length;
-		return totalClients;
+    }*/
+	function getTotalClientsPerPostMan(address storageAddress,address postManAddress)public view onlyPostMan(postManAddress)returns(uint){
+		EternalStorage eternalStorage=EternalStorage(storageAddress);
+		return eternalStorage.getTotalClient(postManAddress);
 	}
 }
 	
