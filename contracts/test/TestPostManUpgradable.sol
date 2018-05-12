@@ -5,6 +5,7 @@ import "truffle/DeployedAddresses.sol";
 import "../contracts/PostManUpgradable.sol";
 contract TestPostManUpgradable {
 	PostManUpgradable _postMan = PostManUpgradable(DeployedAddresses.PostManUpgradable());
+	
 	function testSubscribingProcess()public{
 		bool expected=true;
 		bool result=_postMan.subscribeClient(this);
