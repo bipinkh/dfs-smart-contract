@@ -15,6 +15,8 @@ contract('GenericSubscribe',function(accounts){
 			//adding clients by postman
 			await genericSubscribe.subscribeClient(eternalStorage.address, accounts[2],accounts[3])
 			await genericSubscribe.subscribeClient(eternalStorage.address,accounts[2],accounts[4])
+			await genericSubscribe.addSubNode(accounts[2],accounts[5]);
+			await genericSubscribe.addSubNode(accounts[2],accounts[6]);
 			
 		}
 	)
@@ -55,4 +57,37 @@ contract('GenericSubscribe',function(accounts){
 			assert.equal(result,expectedClients,"result      "+result+"expected      "+expectedClients)
 		}
 	)
+	
+	it('adding subnode to postman',
+		async function(){
+			//adding subnode
+			var result=await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[5])
+			var expected=true
+			assert.equal(result,expected,"result      "+result+"expected      "+expected)
+		
+		})
+	it('delete subnode to postman',
+		async function(){
+			//adding subnode
+			//await genericSubscribe.addSubNode(accounts[2],accounts[5]);
+			//await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[5]);
+			//assert.equal(result,expected,"result      "+result+"expected      "+expected)
+			//deleting subnode
+			await genericSubscribe.deleteSubNode(accounts[2],accounts[5])
+			var result=await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[5])
+			var expected=false;
+			assert.equal(result,expected,"result      "+result+"expected      "+expected)
+			
+		
+		})
+	it('gets subnode list to postman',
+		async function(){
+			var expected=[accounts[5],accounts[6]]
+			var result=await genericSubscribe.getSubNodeList(accounts[2])
+			//=await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[5]);
+			
+			assert.equal(result[0],expected[0],"result      "+result[0]+"expected      "+expected[0])
+			assert.equal(result[1],expected[1],"result      "+result[1]+"expected      "+expected[1])
+		
+		})
 })

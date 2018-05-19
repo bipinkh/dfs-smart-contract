@@ -5,12 +5,15 @@ pragma solidity ^0.4.19;
  * @dev This contract holds all the necessary state variables to carry out the storage of any contract.
  */
 contract EternalStorage {
+	
+	
 	struct clientsInfo{
 	    address clientAddress;
 	}
 	//look specific clients if address is known
-	 mapping  (address=>clientsInfo[])public postManToClientsMap;
-
+	mapping  (address=>clientsInfo[])public postManToClientsMap;
+	
+	 
 	//chunk info of each client
 	struct chunkInfo{
 		bytes32 chunkHash;
@@ -18,6 +21,10 @@ contract EternalStorage {
 	}
 	//consider 1 address has single chunkInfo for now
 	mapping(address=>chunkInfo) chunkInfoMap;
+	
+	
+	//mapping(address=>chunkInfo[]) chunkInfoMapWithPostMan;
+	
 	
 	function addPostManToClientMap(address postManAddress,address clientAddress)public{
 	  postManToClientsMap[postManAddress].push(clientsInfo(clientAddress));
@@ -31,7 +38,7 @@ contract EternalStorage {
 			if(totalClients[i].clientAddress==clientAddress){
 				//there is client in subscriber list
 				delete postManToClientsMap[postManAddress][i];
-				delete totalClients[i];		
+					
 			}
 		}
 	}
