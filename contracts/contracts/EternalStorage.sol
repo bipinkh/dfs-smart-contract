@@ -16,14 +16,15 @@ contract EternalStorage {
 	 
 	//chunk info of each client
 	struct chunkInfo{
-		bytes32 chunkHash;
-		bytes32 GMHash;
+		string chunkData;
+		uint chunkIndex;
+		
 	}
 	//consider 1 address has single chunkInfo for now
-	mapping(address=>chunkInfo) chunkInfoMap;
+	//mapping(address=>chunkInfo) chunkInfoMap;
 	
-	
-	//mapping(address=>chunkInfo[]) chunkInfoMapWithPostMan;
+	//consider 1 postman has many chunks 
+	mapping(address=>chunkInfo[]) chunkInfoMapWithPostMan;
 	
 	
 	function addPostManToClientMap(address postManAddress,address clientAddress)public{
@@ -67,18 +68,39 @@ contract EternalStorage {
 	function getTotalClient(address postManAddress)public returns(uint){
 		return postManToClientsMap[postManAddress].length;
 	}
-	
+	function compareStrings (string a, string b) view returns (bool){
+       return keccak256(a) == keccak256(b);
+   }
 	
 	//for chunk data
-	
-	function getChunkInfo(address clientAddress)public returns(bytes32,bytes32){
-		return (chunkInfoMap[clientAddress].chunkHash,chunkInfoMap[clientAddress].GMHash);
+	function getTotalChunkPerPostman(address postManAddress)public returns(uint){
+		uint totalChunks=chunkInfoMapWithPostMan[postManAddress].length;
+		return totalChunks;
 	}
-	function setChunkInfo(address clientAddress,bytes32 _chunkHash,bytes32 _GMHash)public{
-		chunkInfoMap[clientAddress].chunkHash=_chunkHash;
-		chunkInfoMap[clientAddress].GMHash=_GMHash;
+	function getChunkInfo(address postManAddress,string chunkHash)public returns(uint){
+		uint totalLength=chunkInfoMapWithPostMan[postManAddress].length;
+		  chunkInfo[]    memory chunkData = new chunkInfo[](totalLength);
+		uint index;
+		for(uint i=0;i<totalLength;i++){
+			if(compareStrings(chunkHash,chunkData[i].chunkData)){
+			index=chunkData[i].chunkIndex;
+			}
+		}
+		return totalLength;
 	}
-	function deleteChunkInfo(address clientAddress)public{
-		delete chunkInfoMap[clientAddress];
+	function setChunkInfo(address postManAddress,string data,uint _index)public{
+		chunkInfoMapWithPostMan[postManAddress].push(chunkInfo(data,_index));
 	}
+	/*function deleteChunkInfo(address postManAddress,bytes32 _fileHash,bytes32 _chunkHash)public{
+		chunkInfo[] memory totalChunks=chunkInfoMapWithPostMan[postManAddress];
+		uint totalChunksLength=totalChunks.length;
+		for(uint i=0;i<totalChunksLength;i++){
+			if(totalChunks[i].fileHash==_fileHash&&totalChunks[i].chunkHash==_chunkHash){
+				//there is client in subscriber list
+				delete chunkInfoMapWithPostMan[postManAddress][i];
+					
+			}
+		}
+	}*/
+	//function checkChunkStatus(address postManAddress,address clientAddress,bytes32 
 }

@@ -1,9 +1,10 @@
 pragma solidity^0.4.19;
 //import "./Upgradable.sol";
 import "./EternalStorage.sol";
-import "./SubNode.sol";
+import "./StoringChunk.sol";
 
-contract GenericSubscribe is SubNode{
+
+contract GenericSubscribe is StoringChunk{
 	
 	 
 	function subscribeClient(address storageAddress,address postManAddress,address clientAddress)public onlyPostMan(postManAddress){

@@ -1,48 +1,48 @@
 pragma solidity^0.4.19;
-import "./Upgradable.sol";
 import "./EternalStorage.sol";
-import "./DatabaseAccessControl.sol";
+import "./SubNode.sol";
 
-contract StoringChunk is DatabaseAccessControl{
+contract StoringChunk is SubNode{
 	function storeChunk(address storageAddress,
 						address clientAddress,
 						address postManAddress,
-						bytes32 chunkHash,
-						bytes32 GMHash)
+						string chunkData,
+						uint index)
 						onlyPostMan(postManAddress)
 						returns (bool)
 						{
 							EternalStorage externalStorage=EternalStorage(storageAddress);
 							
-									externalStorage.setChunkInfo(clientAddress,chunkHash,GMHash);
+									//externalStorage.setChunkInfo(postManAddress,fileHash,chunkHash,GMHash,index);
+									externalStorage.setChunkInfo(postManAddress,chunkData,index);
+									
 									return true;
 								
 	
 	}
-	function deleteChunk(address storageAddress,
+	/*function deleteChunk(address storageAddress,
 						address clientAddress,
-						address postManAddress)
+						address postManAddress,
+						bytes32 fileHash,
+						bytes32 chunkHash)
 						onlyPostMan(postManAddress)
 						returns (bool)
 						{
 							EternalStorage externalStorage=EternalStorage(storageAddress);
 								
-									externalStorage.deleteChunkInfo(clientAddress);
+									externalStorage.deleteChunkInfo(postManAddress,fileHash,chunkHash);
 									return true;
 							
-	}
-	function viewChunk(address storageAddress,
+	}*/
+	function viewChunkNumberPerPostman(address storageAddress,
 						address clientAddress,
 						address postManAddress)
+						view
 						onlyPostMan(postManAddress)
-						returns (bool)
+						returns (uint)
 						{
 							EternalStorage externalStorage=EternalStorage(storageAddress);
-							
-									bytes32 chunkHash;
-									bytes32 GMHash;
-									(chunkHash,GMHash)=externalStorage.getChunkInfo(clientAddress);
-									return true;
-								
+									uint index=externalStorage.getTotalChunkPerPostman(postManAddress);
+									return index;
 	}
 }
