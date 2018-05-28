@@ -1,13 +1,19 @@
 # DecentralizedDatabaseContracts
-Contract :IsOwner
+
+##Contract :[IsOwner](contracts/contracts/IsOwner.sol)
 	keeps track of owner address and gives owner modifier
-Contract :IsPostMan is IsOwner
+	
+##Contract :IsPostMan is IsOwner
 	maintains database of postmans address
-Contract :SubNode is IsPostMan
+	
+##Contract :SubNode is IsPostMan
 	maintains database of subnode address associated with particular postman
-Contract :StoringChunk is SubNode
+
+##Contract :StoringChunk is SubNode
 	has function to manage chunklist per postman
-Contract :GenericSubscribe is StoringChunk
+
+##Contract :GenericSubscribe is StoringChunk
 	has function to manage subscribers per postman
-Contract EternalStorage
+
+##Contract :EternalStorage
 	has required data with getters and setters
