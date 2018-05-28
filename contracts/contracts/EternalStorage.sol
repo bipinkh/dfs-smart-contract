@@ -20,8 +20,6 @@ contract EternalStorage {
 		uint chunkIndex;
 		
 	}
-	//consider 1 address has single chunkInfo for now
-	//mapping(address=>chunkInfo) chunkInfoMap;
 	
 	//consider 1 postman has many chunks 
 	mapping(address=>chunkInfo[]) chunkInfoMapWithPostMan;
