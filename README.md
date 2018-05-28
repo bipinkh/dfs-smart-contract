@@ -8,11 +8,11 @@
 
 	maintains database of postmans address
 	
-## Contract :[SubNode is IsPostMan](contracts/contracts/SubNode.sol)
+## Contract :[NewSubNode is IsPostMan](contracts/contracts/NewSubNode.sol)
 
 	maintains database of subnode address associated with particular postman
 
-## Contract :[StoringChunk is SubNode](contracts/contracts/StoringChunk.sol)
+## Contract :[StoringChunk is NewSubNode](contracts/contracts/StoringChunk.sol)
 
 	has function to manage chunklist per postman
 

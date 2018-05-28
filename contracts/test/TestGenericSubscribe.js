@@ -74,7 +74,7 @@ contract('GenericSubscribe',function(accounts){
 	it('adding subnode to postman',
 		async function(){
 			//adding subnode
-			var result=await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[5])
+			var result=await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[6])
 			var expected=true
 			assert.equal(result,expected,"result      "+result+"expected      "+expected)
 		
@@ -88,10 +88,19 @@ contract('GenericSubscribe',function(accounts){
 			
 		
 		})
+		it('gets subnode number to postman',
+		async function(){
+			var expected=2
+			var result=await genericSubscribe.getSubnodesNumber(accounts[2])
+			//=await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[5]);
+			
+			assert.equal(result,expected,"result      "+result+"expected      "+expected)
+			
+		})
 	it('gets subnode list to postman',
 		async function(){
 			var expected=[accounts[5],accounts[6]]
-			var result=await genericSubscribe.getSubNodeList(accounts[2])
+			var result=await genericSubscribe.getSubnodes(accounts[2])
 			//=await genericSubscribe.checkSubNodeStatus(accounts[2],accounts[5]);
 			
 			assert.equal(result[0],expected[0],"result      "+result[0]+"expected      "+expected[0])

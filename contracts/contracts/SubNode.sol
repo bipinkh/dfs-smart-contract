@@ -2,7 +2,7 @@ pragma solidity^0.4.19;
 import "./IsPostMan.sol";
 contract SubNode is IsPostMan{
 
-	struct subNodeInfo{
+	/*struct subNodeInfo{
 	    address subNodeAddress;
 	}
 	mapping(address=>subNodeInfo[]) subNodeMaps;
@@ -44,5 +44,5 @@ contract SubNode is IsPostMan{
         }
         return cAddress;
 	
-	}
+	}*/
 }

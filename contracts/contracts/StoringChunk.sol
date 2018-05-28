@@ -1,8 +1,8 @@
 pragma solidity^0.4.19;
 import "./EternalStorage.sol";
-import "./SubNode.sol";
+import "./NewSubNode.sol";
 
-contract StoringChunk is SubNode{
+contract StoringChunk is NewSubNode{
 	function storeChunk(address storageAddress,
 						address clientAddress,
 						address postManAddress,
