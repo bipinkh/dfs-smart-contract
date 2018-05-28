@@ -3,27 +3,44 @@ import "./IsPostMan.sol";
 
 contract SubNode is IsPostMan{
 
+
 	struct subNodeInfo{
-        // detail info can be stored here
         bool isActive;
+        uint listPointer;
+	}
+	
+	struct nodeInfo{
+	    mapping(address => subNodeInfo) subNodeMaps;    // subnode address to it's info
+	    address[] subNodeKeys;      // list of all subscribed nodes
 	}
     
-	mapping(address => mapping(address => subNodeInfo) ) subNodeMaps;
-	// here the structure is ::  postman_address =>  ( subnode_address => subnodeinfo)
-	
+	mapping(address => nodeInfo ) nodeMaps; // postman_address ==> postmaninfo
+
+
 	function addSubNode(address postManAddress,address subNodeAddress) public onlyPostMan(postManAddress) {
-		subNodeInfo memory sni = subNodeInfo(true);
-		subNodeMaps[postManAddress][subNodeAddress] = sni;
+		uint myIndex = nodeMaps[postManAddress].subNodeKeys.push(subNodeAddress) - 1;
+		subNodeInfo memory sni = subNodeInfo(true,myIndex);
+    	nodeMaps[postManAddress].subNodeMaps[subNodeAddress] = sni;
 	}
 	
 	function checkSubNodeStatus(address p, address sn) public view onlyPostMan(p) returns (bool){
-	    return subNodeMaps[p][sn].isActive;
+	    return nodeMaps[p].subNodeMaps[sn].isActive;
 	}
 	
 	
-	function deleteSubNode(address postManAddress,address subNodeAddress)public onlyPostMan(postManAddress){
-	    delete subNodeMaps[postManAddress][subNodeAddress];
+	function deleteSubNode(address postManAddress,address subNodeAddress)public onlyPostMan(postManAddress) returns (bool){
+	    uint deletingIndex = nodeMaps[postManAddress].subNodeMaps[subNodeAddress].listPointer;
+	    uint lastIndex = nodeMaps[postManAddress].subNodeKeys.length - 1;
+        address lastKey   = nodeMaps[postManAddress].subNodeKeys[lastIndex];
+        nodeMaps[postManAddress].subNodeKeys[deletingIndex] = lastKey;
+        nodeMaps[postManAddress].subNodeMaps[lastKey].listPointer = deletingIndex;
+        nodeMaps[postManAddress].subNodeKeys.length--;
+        return true;
 	}
 	
-
+	function getSubnodes (address p) public returns (address[]){
+	    return nodeMaps[p].subNodeKeys;
+	}
+	
+	
 }
