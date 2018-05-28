@@ -17,10 +17,12 @@ contract SubNode is IsPostMan{
 	mapping(address => nodeInfo ) nodeMaps; // postman_address ==> postmaninfo
 
 
-	function addSubNode(address postManAddress,address subNodeAddress) public onlyPostMan(postManAddress) {
-		uint myIndex = nodeMaps[postManAddress].subNodeKeys.push(subNodeAddress) - 1;
+	function addSubNode(address postManAddress,address subNodeAddress) public onlyPostMan(postManAddress) returns (bool){
+		require(! (nodeMaps[postManAddress].subNodeMaps[subNodeAddress].isActive) );
+        uint myIndex = nodeMaps[postManAddress].subNodeKeys.push(subNodeAddress) - 1;
 		subNodeInfo memory sni = subNodeInfo(true,myIndex);
     	nodeMaps[postManAddress].subNodeMaps[subNodeAddress] = sni;
+        return true;
 	}
 	
 	function checkSubNodeStatus(address p, address sn) public view onlyPostMan(p) returns (bool){
@@ -29,12 +31,14 @@ contract SubNode is IsPostMan{
 	
 	
 	function deleteSubNode(address postManAddress,address subNodeAddress)public onlyPostMan(postManAddress) returns (bool){
+		require( nodeMaps[postManAddress].subNodeMaps[subNodeAddress].isActive );
 	    uint deletingIndex = nodeMaps[postManAddress].subNodeMaps[subNodeAddress].listPointer;
 	    uint lastIndex = nodeMaps[postManAddress].subNodeKeys.length - 1;
         address lastKey   = nodeMaps[postManAddress].subNodeKeys[lastIndex];
         nodeMaps[postManAddress].subNodeKeys[deletingIndex] = lastKey;
         nodeMaps[postManAddress].subNodeMaps[lastKey].listPointer = deletingIndex;
         nodeMaps[postManAddress].subNodeKeys.length--;
+        delete nodeMaps[postManAddress].subNodeMaps[subNodeAddress];
         return true;
 	}
 	
