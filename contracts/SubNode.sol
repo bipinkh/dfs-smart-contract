@@ -8,12 +8,12 @@ contract SubNode is IsPostMan{
         bool isActive;
         uint listPointer;
 	}
-	
+
 	struct nodeInfo{
 	    mapping(address => subNodeInfo) subNodeMaps;    // subnode address to it's info
 	    address[] subNodeKeys;      // list of all subscribed nodes
 	}
-    
+
 	mapping(address => nodeInfo ) nodeMaps; // postman_address ==> postmaninfo
 
 
@@ -24,12 +24,12 @@ contract SubNode is IsPostMan{
     	nodeMaps[postManAddress].subNodeMaps[subNodeAddress] = sni;
         return true;
 	}
-	
-	function checkSubNodeStatus(address p, address sn) public view onlyPostMan(p) returns (bool){
+
+	function checkSubNodeStatus(address p, address sn) view onlyPostMan(p) returns (bool){
 	    return nodeMaps[p].subNodeMaps[sn].isActive;
 	}
-	
-	
+
+
 	function deleteSubNode(address postManAddress,address subNodeAddress)public onlyPostMan(postManAddress) returns (bool){
 		require( nodeMaps[postManAddress].subNodeMaps[subNodeAddress].isActive );
 	    uint deletingIndex = nodeMaps[postManAddress].subNodeMaps[subNodeAddress].listPointer;
@@ -41,10 +41,10 @@ contract SubNode is IsPostMan{
         delete nodeMaps[postManAddress].subNodeMaps[subNodeAddress];
         return true;
 	}
-	
-	function getSubnodes (address p) public returns (address[]){
+
+	function getSubnodes (address p) view returns (address[]){
 	    return nodeMaps[p].subNodeKeys;
 	}
-	
-	
+
+
 }

@@ -6,7 +6,7 @@ contract IsOwner{
 		require(msg.sender==owner);
 		_;
 	}
-	function IsOwner(){
+	constructor(){
 		owner=msg.sender;
 	}
 }
