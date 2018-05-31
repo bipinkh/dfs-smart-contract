@@ -4,7 +4,6 @@ import "./NewSubNode.sol";
 
 contract StoringChunk is NewSubNode{
 	function storeChunk(address storageAddress,
-						address clientAddress,
 						address postManAddress,
 						string chunkData,
 						uint index)
@@ -21,7 +20,6 @@ contract StoringChunk is NewSubNode{
 	
 	}
 	/*function deleteChunk(address storageAddress,
-						address clientAddress,
 						address postManAddress,
 						bytes32 fileHash,
 						bytes32 chunkHash)
@@ -35,7 +33,6 @@ contract StoringChunk is NewSubNode{
 							
 	}*/
 	function viewChunkNumberPerPostman(address storageAddress,
-						address clientAddress,
 						address postManAddress)
 						view
 						onlyPostMan(postManAddress)
