@@ -1,0 +1,8 @@
+#truffle build files
+build/
+
+#npm packages
+node_modules/
+
+#vscode
+MajorProjectContract.code-workspace
